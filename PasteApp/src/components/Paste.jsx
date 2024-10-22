@@ -115,11 +115,19 @@ const Paste = () => {
 											<button
 												className="p-2 rounded-[0.2rem] bg-white border border-[#c7c7c7] hover:bg-transparent group hover:border-yellow-500"
 												onClick={() => {
+													const baseUrl =
+														window.location.origin ===
+														"http://localhost:5173"
+															? "http://localhost:5173/pastes"
+															: "https://paste-app-mu.vercel.app/pastes";
+
+													const shareUrl = `${baseUrl}/${paste?._id}`;
+
 													if (navigator.share) {
 														navigator
 															.share({
 																title: paste?.title,
-																url: `https://paste-app-mu.vercel.app/pastes/${paste?._id}`, // Sharing the viewPaste URL
+																url: shareUrl, // Use dynamic URL based on environment
 															})
 															.then(() =>
 																toast.success(
