@@ -1,4 +1,4 @@
-import { Calendar, Copy, Eye, PencilLine, Trash2 } from "lucide-react";
+import { Calendar, Copy, Eye, PencilLine, Trash2, Share } from "lucide-react";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react"; // Import useState
@@ -108,6 +108,36 @@ const Paste = () => {
 											>
 												<Copy
 													className="text-black group-hover:text-green-500"
+													size={20}
+												/>
+											</button>
+
+											<button
+												className="p-2 rounded-[0.2rem] bg-white border border-[#c7c7c7] hover:bg-transparent group hover:border-yellow-500"
+												onClick={() => {
+													if (navigator.share) {
+														navigator
+															.share({
+																title: paste?.title,
+																url: `https://paste-app-mu.vercel.app/pastes/${paste?._id}`, // Sharing the viewPaste URL
+															})
+															.then(() =>
+																toast.success(
+																	"Shared successfully"
+																)
+															)
+															.catch((error) =>
+																toast.error("Error sharing")
+															);
+													} else {
+														toast.error(
+															"Share not supported on this browser"
+														);
+													}
+												}}
+											>
+												<Share
+													className="text-black group-hover:text-yellow-500"
 													size={20}
 												/>
 											</button>
