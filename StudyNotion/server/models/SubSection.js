@@ -1,4 +1,4 @@
-import { Schema, model, mongoose } from "mongoose";
+const { Schema, model, mongoose } = require("mongoose");
 
 const subSectionSchema = new Schema(
 	{
@@ -18,4 +18,4 @@ const subSectionSchema = new Schema(
 	{ timestamps: true }
 );
 
-export const SubSection = model("SubSection", subSectionSchema);
+module.exports = model("SubSection", subSectionSchema);

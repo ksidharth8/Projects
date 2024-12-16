@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Course = require("../models/Course");
 const CourseProgress = require("../models/CourseProgress");
 const { uploadFileToCloudinary } = require("../utils/fileUploader");
-const { convertSecondsToDuration } = require("../utils/convertSecToDuration");
+const { convertSecondsToDuration } = require("../utils/convertSecondsToDuration");
 
 // update profile (as profile is created when user is created with null values)
 const updateProfile = async (req, res) => {

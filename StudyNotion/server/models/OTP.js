@@ -1,5 +1,5 @@
-import { Schema, model, mongoose } from "mongoose";
-import { mailSender } from "../utils/mailSender";
+const { Schema, model, mongoose } = require("mongoose");
+const { mailSender } = require("../utils/mailSender");
 const emailVerification = require("../mail/templates/emailVerification");
 
 const OTPSchema = new Schema({
@@ -41,4 +41,4 @@ OTPSchema.pre("save", async function (next) {
 	next();
 });
 
-export const OTP = model("OTP", OTPSchema);
+module.exports = model("OTP", OTPSchema);

@@ -5,7 +5,7 @@ const SubSection = require("../models/SubSection");
 const User = require("../models/User");
 const CourseProgress = require("../models/CourseProgress");
 const { uploadFileToCloudinary } = require("../utils/fileUploader");
-const { convertSecondsToDuration } = require("../utils/secToDuration");
+const { convertSecondsToDuration } = require("../utils/convertSecondsToDuration");
 require("dotenv").config();
 
 // getAllCourses
