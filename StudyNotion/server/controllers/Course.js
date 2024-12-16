@@ -5,7 +5,9 @@ const SubSection = require("../models/SubSection");
 const User = require("../models/User");
 const CourseProgress = require("../models/CourseProgress");
 const { uploadFileToCloudinary } = require("../utils/fileUploader");
-const { convertSecondsToDuration } = require("../utils/convertSecondsToDuration");
+const {
+	convertSecondsToDuration,
+} = require("../utils/convertSecondsToDuration");
 require("dotenv").config();
 
 // getAllCourses
@@ -53,21 +55,21 @@ const createCourse = async (req, res) => {
 			courseDescription,
 			whatYouWillLearn,
 			price,
-			tags: _tags,
+			tags,
 			category,
 			status,
-			instructions: _instructions,
+			instructions,
 		} = req.body;
 
 		// fetch the thumbnail from the request
 		const thumbnail = req.files.thumbnailImage;
 
 		// convert tags and instructions from stringified Array to Array
-		const tags = JSON.parse(_tags);
-		const instructions = JSON.parse(_instructions);
+		const _tags = JSON.parse(tags);
+		const _instructions = JSON.parse(instructions);
 
-		console.log("Tags: ", tags);
-		console.log("Instructions: ", instructions);
+		console.log("Tags: ", _tags);
+		console.log("Instructions: ", _instructions);
 
 		// check if all fields are provided (validate)
 		if (
@@ -78,7 +80,6 @@ const createCourse = async (req, res) => {
 			!tags.length ||
 			!thumbnail ||
 			!category ||
-			!status ||
 			!instructions.length
 		) {
 			return res.status(403).json({
@@ -255,7 +256,7 @@ const getCourseDetails = async (req, res) => {
 				path: "courseContent",
 				populate: {
 					path: "subSection",
-					select: "-videoUrl", // exclude videoUrl from the response
+					// select: "-videoUrl", // exclude videoUrl from the response
 				},
 			})
 			.exec();

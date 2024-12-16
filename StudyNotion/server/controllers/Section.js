@@ -22,7 +22,7 @@ const createSection = async (req, res) => {
 		});
 
 		// update the course with the new section (push the section id to the course)
-		const updatedCourseDetails = await Course.findOneAndUpdate(
+		const updatedCourseDetails = await Course.findByIdAndUpdate(
 			courseId,
 			{ $push: { courseContent: newSection._id } },
 			{ new: true }
@@ -58,10 +58,10 @@ const updateSection = async (req, res) => {
 		const { sectionName, sectionId, courseId } = req.body;
 
 		// data validation
-		if (!sectionName || !sectionId || !courseId) {
+		if (!sectionId) {
 			return res.status(400).json({
 				success: false,
-				message: "All fields are required",
+				message: "Section Id is required",
 			});
 		}
 
@@ -72,15 +72,18 @@ const updateSection = async (req, res) => {
 			{ new: true }
 		);
 
-		// update the course with the updated section
-		const course = await Course.findById(courseId)
-			.populate({
-				path: "courseContent",
-				populate: {
-					path: "subSection",
-				},
-			})
-			.exec();
+		let course;
+		if (courseId) {
+			// update the course with the updated section
+			course = await Course.findById(courseId)
+				.populate({
+					path: "courseContent",
+					populate: {
+						path: "subSection",
+					},
+				})
+				.exec();
+		}
 
 		// return success response
 		res.status(200).json({
@@ -138,14 +141,23 @@ const deleteSection = async (req, res) => {
 		// 	data: course,
 		// });
 
-		// fetch data from the request parameters
-		const { sectionId } = req.params;
+		// fetch data from the request body
+		const { sectionId } = req.body;
 
 		// fetch the course that the section belongs to
 		const courseId = await Section.findById(sectionId);
 
 		// delete the section from the database
-		await Section.findByIdAndDelete(sectionId);
+		const deletedSection=await Section.findByIdAndDelete(sectionId);
+
+		// check if the section is deleted
+		if (!deletedSection) {
+			return res.status(404).json({
+				success: false,
+				message: "Section not found",
+			});
+			
+		}
 
 		// update the course (pull the section id from the course)
 		const updatedCourse = await Course.findOneAndUpdate(
@@ -158,6 +170,7 @@ const deleteSection = async (req, res) => {
 		// return success response
 		res.status(200).json({
 			success: true,
+			deletedSection: deletedSection,
 			course: updatedCourse,
 			message: "Section deleted successfully",
 		});

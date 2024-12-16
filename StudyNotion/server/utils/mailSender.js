@@ -19,7 +19,7 @@ const mailSender = async (email, title, body) => {
 			from: process.env.EMAIL,
 			to: `${email}`,
 			subject: `${title}`,
-			text: `${body}`,
+			html: `${body}`,
 		});
 		console.log("Info: ", info);
 

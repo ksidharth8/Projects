@@ -73,12 +73,12 @@ router.post("/addSection", auth, isInstructor, createSection);
 router.post("/updateSection", auth, isInstructor, updateSection);
 // Delete a Section [POST /deleteSection]
 router.post("/deleteSection", auth, isInstructor, deleteSection);
+// Add a Sub Section to a Section
+router.post("/addSubSection", auth, isInstructor, createSubSection);
 // Update a Sub Section [POST /updateSubSection]
 router.post("/updateSubSection", auth, isInstructor, updateSubSection);
 // Delete a Sub Section [POST /deleteSubSection]
 router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);
-// Add a Sub Section to a Section
-router.post("/addSubSection", auth, isInstructor, createSubSection);
 
 // Get all Registered Courses [GET /getAllCourses]
 router.get("/getAllCourses", getAllCourses);

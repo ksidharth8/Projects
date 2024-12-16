@@ -159,7 +159,7 @@ const updateDisplayPicture = async (req, res) => {
 		);
 
 		// return success response
-		res.send(200).json({
+		res.status(200).json({
 			success: true,
 			updatedProfile: updatedProfile,
 			message: `Image Updated successfully`,

@@ -1,5 +1,5 @@
 const { Schema, model, mongoose } = require("mongoose");
-const { mailSender } = require("../utils/mailSender");
+const  mailSender  = require("../utils/mailSender");
 const emailVerification = require("../mail/templates/emailVerification");
 
 const OTPSchema = new Schema({
@@ -13,7 +13,7 @@ const OTPSchema = new Schema({
 	},
 	createdAt: {
 		type: Date,
-		defaultB: Date.now(),
+		default: Date.now(),
 		expires: 60 * 5, // This document will be automatically deleted after 5 minutes of its creation
 	},
 });

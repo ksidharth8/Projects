@@ -95,7 +95,7 @@ const signUp = async (req, res) => {
 			!email ||
 			!password ||
 			!confirmPassword ||
-			!contactNumber ||
+			!accountType ||
 			!otp
 		) {
 			return res.status(403).json({
@@ -134,7 +134,7 @@ const signUp = async (req, res) => {
 				success: false,
 				message: "OTP not found",
 			});
-		} else if (otp !== recentOTP.otp) {
+		} else if (otp !== recentOTP[0].otp) {
 			// OTP does not match
 			return res.status(400).json({
 				success: false,
@@ -145,8 +145,12 @@ const signUp = async (req, res) => {
 		// hash the password
 		const hashedPassword = await bcrypt.hash(password, 10);
 
+		// Create the user
+		let approved = "";
+		approved === "Instructor" ? (approved = false) : (approved = true);
+
 		// create a new profile
-		const profileDetails = new Profile.create({
+		const profileDetails = await Profile.create({
 			gender: null,
 			dateOfBirth: null,
 			about: null,

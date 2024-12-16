@@ -20,14 +20,14 @@ const courseSchema = new Schema(
 			ref: "Category",
 			// required: true,
 		},
-		whatWillYouLearn: {
+		whatYouWillLearn: {
 			type: String,
 			required: true,
 		},
 		courseContent: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
-				ref: "SubSection",
+				ref: "Section",
 			},
 		],
 		ratingAndReviews: [
