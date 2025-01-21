@@ -1,8 +1,5 @@
-# React + Vite
+# Scripts Folder
+This folder contains utility scripts for automation and data processing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `data_cleaning.py`: Cleans the raw data files and prepares them for analysis.
+- `automation_tool.sh`: Automates repetitive tasks to save time and reduce errors.
